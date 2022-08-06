@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang
 
 ENV TOKEN ""
 
@@ -11,7 +11,7 @@ COPY ./app/go.sum ./
 RUN go mod download
 
 COPY ./app/main.go ./
-COPY ./translate.db ./
+COPY ./translate.db /
 
 RUN go build -o /mtbot
 

@@ -6,4 +6,4 @@ services:
         container_name: minion-bot
         restart: unless-stopped
         args:
-            TOKEN: ""
+            TOKEN: ${token}

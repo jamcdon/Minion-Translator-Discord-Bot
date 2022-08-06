@@ -2,9 +2,8 @@ version: '3.0'
 
 services:
     minion-bot:
-        build:
-            context: .
-            args:
-                TOKEN: ${token}
+        build: .
         container_name: minion-bot
         restart: unless-stopped
+        environment: 
+            - TOKEN=${token}

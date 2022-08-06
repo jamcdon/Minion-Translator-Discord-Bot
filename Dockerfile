@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-ARG TOKEN
+ENV TOKEN
 
 RUN apk --no-cache add gcc
 
@@ -15,4 +15,4 @@ COPY ./app/translate.db ./
 
 RUN go build -o /mtbot
 
-CMD [ "/mtbot -t " ]
+CMD [ "sh", "-c", "/mtbot", "-t ", "${}" ]

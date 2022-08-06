@@ -5,9 +5,11 @@ import (
     "strings"
     "database/sql"
     "os/signal"
+    "syscall"
+    "os"
+    "flag"
 
-    _ "github.com/mattn/go-sqlite3"
-    _ "github.com/bwmarrin/discordgo"
+    "github.com/bwmarrin/discordgo"
 )
 
 
@@ -51,7 +53,7 @@ func main() {
     // Create a new Discord session using the provided bot token.
     dg, err := discordgo.New("Bot ", Token)
     if err != nil {
-        fmt.Println("error creating Discord session," err)
+        fmt.Println("error creating Discord session,", err)
         return
     }
 
@@ -63,7 +65,7 @@ func main() {
 
     //open websocket for discord conn
     err = dg.Open()
-    if err !nil {
+    if err != nil {
         fmt.Println("error opening connection,", err)
         return
     }

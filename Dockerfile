@@ -2,8 +2,6 @@ FROM golang
 
 ENV TOKEN ""
 
-RUN apk --no-cache add gcc
-
 WORKDIR /app
 COPY ./app/go.mod ./
 COPY ./app/go.sum ./

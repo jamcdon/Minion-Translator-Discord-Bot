@@ -9,8 +9,8 @@ COPY ./app/go.sum ./
 RUN go mod download
 
 COPY ./app/main.go ./
-COPY ./translate.db /
+COPY ./translate.db ./
 
-RUN go build -o /mtbot
+RUN go build -o /app/mtbot
 
-CMD [ "sh", "-c", "/mtbot", "-t ", "$TOKEN" ]
+CMD [ "sh", "-c", "/app/mtbot", "-t ", "$TOKEN" ]

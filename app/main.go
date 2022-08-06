@@ -9,6 +9,7 @@ import (
     "os"
     "flag"
 
+    _ "github.com/mattn/go-sqlite3"
     "github.com/bwmarrin/discordgo"
 )
 
@@ -27,15 +28,20 @@ func init() {
 
 func translate(inputString string) string {
     const sqlFile = "translate.db"
-    db, _ := sql.Open("sqlite3", sqlFile)
+    db, err := sql.Open("sqlite3", sqlFile)
+    if err != nil {
+        fmt.Println(err)
+        return "fuck"
+    }
     defer db.Close()
-
 
     inputArray := strings.Fields(inputString)
     outputString := ""
 
     for i:= 1; i < len(inputArray); i++ {
-        row := db.QueryRow(`SELECT minionSpeak FROM minionTranslate WHERE english LIKE '`+ inputArray[i] + `';`)
+        row := db.QueryRow(`SELECT minionSpeak FROM minionTranslate WHERE english LIKE '%`+ inputArray[i] + `%';`)
+        //sqlStatement := `SELECT minionSpeak FROM minionTranslate WHERE english LIKE %$1%;`
+        //row := db.QueryRow(sqlStatement, inputArray[i])
         var minionspeak string //Translation.Minionspeak
         row.Scan(&minionspeak)
         if minionspeak == "" {
@@ -85,6 +91,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
     }
     if strings.HasPrefix(m.Content, "!mt"){
         translated := translate(m.Content)
-        s.ChannelMessageSend(m.ChannelID, translated)
+        fmt.Println(translated)
+        _, err := s.ChannelMessageSend(m.ChannelID, translated)
+        if err != nil {
+            fmt.Println(err)
+        }
     }
 }

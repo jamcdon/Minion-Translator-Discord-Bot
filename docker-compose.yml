@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+    minion-bot:
+        build: .
+        container_name: minion-bot
+        restart: unless-stopped
+        args:
+            TOKEN: ""

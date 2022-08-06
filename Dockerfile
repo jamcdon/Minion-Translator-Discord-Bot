@@ -11,7 +11,7 @@ COPY ./app/go.sum ./
 RUN go mod download
 
 COPY ./app/main.go ./
-COPY ./app/translate.db ./
+COPY ./translate.db ./
 
 RUN go build -o /mtbot
 

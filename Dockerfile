@@ -15,4 +15,4 @@ COPY ./app/translate.db ./
 
 RUN go build -o /mtbot
 
-CMD [ "sh", "-c", "/mtbot", "-t ", "${TOKEN}" ]
+CMD [ "sh", "-c", "/mtbot", "-t ", "$TOKEN" ]

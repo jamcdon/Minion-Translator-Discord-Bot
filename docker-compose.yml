@@ -2,7 +2,8 @@ version: '3.0'
 
 services:
     minion-bot:
-        build: .
+        build:
+            context: .
             args:
                 TOKEN: ${token}
         container_name: minion-bot

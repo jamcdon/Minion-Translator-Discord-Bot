@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-ENV TOKEN
+ENV TOKEN ""
 
 RUN apk --no-cache add gcc
 

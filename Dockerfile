@@ -2,6 +2,8 @@ FROM golang:alpine
 
 ARG TOKEN
 
+RUN apk --no-cache gcc
+
 WORKDIR /app
 COPY ./app/go.mod ./
 COPY ./app/go.sum ./

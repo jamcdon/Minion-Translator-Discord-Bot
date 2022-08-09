@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:1.13.8
 
 ENV TOKEN ""
 
@@ -13,4 +13,4 @@ COPY ./translate.db ./
 
 RUN go build -o /app/mtbot
 
-CMD [ "sh", "-c", "/app/mtbot", "-t ", "$TOKEN" ]
+ENTRYPOINT ["/app/mtbot"]

@@ -7,31 +7,17 @@ import (
     "os/signal"
     "syscall"
     "os"
-    "flag"
 
     _ "github.com/mattn/go-sqlite3"
     "github.com/bwmarrin/discordgo"
 )
-
-
-var (
-    Token string
-)
-
-
-func init() {
-    flag.StringVar(&Token, "t", "", "Bot Token")
-    flag.Parse()
-}
-
-
 
 func translate(inputString string) string {
     const sqlFile = "translate.db"
     db, err := sql.Open("sqlite3", sqlFile)
     if err != nil {
         fmt.Println(err)
-        return "fuck"
+        return "error opening sqlite db"
     }
     defer db.Close()
 
@@ -54,7 +40,9 @@ func translate(inputString string) string {
     return outputString
 }
 
-func main() {
+func main(){
+    var Token string
+    Token = os.Getenv("TOKEN")
     // Create a new Discord session using the provided bot token.
     dg, err := discordgo.New("Bot " + Token)
     if err != nil {
